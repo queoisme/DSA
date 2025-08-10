@@ -10,28 +10,27 @@ int main(){
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
     freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     cin >> n;
-    vector<int> v;
+    map<int, int> mp;
     while(n--){
     	cin >> s;
-    	if(s == "push"){
+    	if(s == "add"){
     		int x; cin >> x;
-    		v.push_back(x);
+    		mp[x]++;
     	}
-    	else if(s == "pop"){
-    		if(v.size()) v.pop_back();
-    	}
-    	else if(s == "index"){
+    	else if(s == "del"){
     		int x; cin >> x;
-    		--x;
-    		if(v.size() && x < v.size()){
-    			cout << v[x] << endl;
+    		if(mp.count(x)){
+    			mp[x]--;
+                if(mp[x] <= 0) mp.erase(x);
     		}
-    		else{
-    			cout << -1 << endl;
-    		}
+    	}
+    	else if(s == "count"){
+    		int x; cin >> x;
+    		if(mp.count(x)) cout << mp[x] << endl;
+            else cout << 0 << endl;
     	}
     	else{
-    		cout << v.size() << endl;
+    		cout << mp.size() << endl;
     	}
     }
 }
